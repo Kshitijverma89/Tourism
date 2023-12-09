@@ -32,9 +32,9 @@ const Tours = () => {
         <Container>
           <Row>
             {TourDate ?. map(tour=> (
-              <col lg="3" className="mb-4" key={tour.id}> 
+              <Col lg="3" className="mb-4" key={tour.id}> 
                 <TourCard tour={tour}  />
-              </col>
+              </Col>
             ))}
 
             <Col lg='12'>
