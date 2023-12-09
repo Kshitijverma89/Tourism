@@ -1,11 +1,11 @@
 import React ,  {useState, useEffect} from "react" ;
-import CommonSection from  "../shared/CommonSection";
+import CommonSection from  "../Shared/CommonSection";
 
 import "../styles/tour.css";
 import TourDate from '../assets/data/tours'
-import TourCard from './../shared/TourCard';
-import SearchBox from './../shared/SearchBox';
-import Newsletter from './../shared/Newsletter';
+import TourCard from './../Shared/TourCards';
+import SearchBar from './../Shared/SearchBar';
+import Newsletter from './../Shared/Newsletter';
 import { Container, Row, Col} from "reactstrap";
 
 const Tours = () => {
@@ -24,7 +24,7 @@ const Tours = () => {
       <section>
         <Container>
           <Row>
-            <SearchBox />
+            <SearchBar />
           </Row>
         </Container>
       </section>
@@ -37,7 +37,7 @@ const Tours = () => {
               </col>
             ))}
 
-            <col lg='12'>
+            <Col lg='12'>
               <div className="pagination d-flex align-items-center
                justify-content-center mt-4 gap-3">
                 {[...Array(pagecount).keys()].map(number=>( 
@@ -49,7 +49,7 @@ const Tours = () => {
                 ))}
               </div>
               
-            </col>
+            </Col>
           </Row>
         </Container>
       </section>

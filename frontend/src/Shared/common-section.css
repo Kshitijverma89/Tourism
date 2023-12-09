@@ -2,7 +2,7 @@
 
 
 .common_section{
-    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)) ;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
     url("../assets/images/tour.jpg") no-repeat center center;
     background-size: cover;
     height: 300px;

@@ -5,7 +5,7 @@ import Home from "./../pages/Home";
 import Login from "./../pages/Login";
 import Register from "./../pages/Register";
 import SearchResultList from "./../pages/SearchResultList";
-import TourDetails from "./../pages/TourDetails";
+import TourDetails from "./../pages/ToursDetails";
 import Tours from "./../pages/Tours";
 
 const Routers=()=>{

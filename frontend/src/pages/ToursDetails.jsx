@@ -1,9 +1,9 @@
 import React, {useRef, useState} from 'react' ;
 import '../styles/tour-details.css' ;
 import {  Container, Row, Col, Form, ListGroup, ListGroupItemHeading } from 'reactstrap';
-import {userParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import tourDate from '../assets/data/tours';
-import calculateAvgRating from './..utils/avgRating';
+import calculateAvgRating from '../utils/avgRating';
 import avatar from "../assets/images/avatar.jpg";
 
 const ToursDetails = () => {
@@ -11,7 +11,7 @@ const ToursDetails = () => {
   const reviewMsgRef = useRef('')
   const [tourRating, setTourRating]=useState(null)
    
-  const tour = tourData.find(tour => tour.id == id)
+  const tour = tourDate.find(tour => tour.id == id)
   
   
   const {
@@ -26,12 +26,12 @@ const ToursDetails = () => {
        maxGroupSize
   } = tour;
  
-  const {totalRating, avgRating}  = calculateAvgRating(review)
+  const {totalRating, avgRating}  = calculateAvgRating(reviews)
 
   const options = {day: 'numeric', month: 'long' , year:'numeric'}
 
   const submitHandler = e=>{
-    e.prevemtDefault()
+    e.preventDefault()
     const reviewText = reviewMsgRef.current.value;
   };
 
@@ -45,7 +45,7 @@ const ToursDetails = () => {
             <img src={photo} alt="" />
 
             <div className="tour__info">
-              <h2>{tittle}</h2>
+              <h2>{title}</h2>
               <div className="d-flex align-item-center" gap-5 > </div>
               <span className="d-flex align-items-center gap-1">
           <i class="ri-star-s-fill" 
@@ -59,18 +59,17 @@ const ToursDetails = () => {
             )} 
               </span>
                 <span>
-                  <i> class="ri-map-pin-user-fill"</i> {address}
+                  <i class="ri-map-pin-user-fill"></i> {address}
                 </span>
             </div>
 
             <div className="tour__extra-detail">
               <span>
-                <i class="ri-map-pin-2-line"></i> {City} 
+                <i class="ri-map-pin-2-line"></i> {city} 
                 </span>
               <span>
                 <i class="ri-money-dollar-circle-line"></i> ${price} per person 
                 </span>
-              <span>
               <span>
                 <i class="ri-map-pin-time--line"></i> ${distance} k/m
                 </span>
@@ -120,7 +119,7 @@ const ToursDetails = () => {
                           <div>
                             <h5>muhib</h5>
                             <p>
-                              {new Data("01-18-2023") .tolocaleDataString("en-US" , options) 
+                              {new Date("01-18-2023") .tolocaleDataString("en-US" , options) 
                               }
                             </p>
                           </div>
