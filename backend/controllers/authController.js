@@ -2,8 +2,9 @@
 import User from "../models/User.js";
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
+
 // user registration
-export const register=async (res,req)=>{
+export const register= async(req,res)=>{
     try {
 
         // hashing password
@@ -13,8 +14,8 @@ export const register=async (res,req)=>{
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
-        photo: req.body.photo,
+        password: hash,
+        photo: req.body.photo
       });
 
       await newUser.save();
@@ -22,15 +23,16 @@ export const register=async (res,req)=>{
       res.status(200).json({ success: true, message: "Successfully created" });
     } catch (err) {
         console.error(err);
-      res.status(404).json({ success: false, message: "Failed to create. Try again" });
+      res.status(500).json({ success: false, message: "Failed to create. Try again" });
     }
 };
 
 // user login
-export const login=async (res,req) =>{
-    try {
+export const login=async(req,res) =>{
         const email= req.body.email;
 
+    try {
+    
         const user= await User.findOne({email}); 
 
        // if user doesn't exist
@@ -43,24 +45,25 @@ export const login=async (res,req) =>{
 
        // if password is incorrect
        if(!checkCorrectPassword){
-        return res.status(402).json({success: false, message: "Incorrect email or password"});
+        return res.status(401).json({success: false, message: "Incorrect email or password"});
        }
       
-       const {password,role, ...rest}=user._doc;
+       const {password, role, ...rest}=user._doc;
 
        //create jwt token
-       const token=jwt.sign({id:user_id,role:user.role}, process.env.JWT_SECRET_KEY, { expiresIn: "15d" });
+       const token=jwt.sign(
+        {id:user._id, role:user.role}, 
+        process.env.JWT_SECRET_KEY, 
+        { expiresIn: "15d" });
 
        // set token in the browser cookie and send the response to the client
 
        res.cookie('accessToken', token,{
         httpOnly: true,
         expires:token.expiresIn
-        })
-        .status(200)
-        .json({ token,
-            data:{...rest},
-            role,
+        }).status(200).json({ token,
+             data:{...rest},
+            // role,
         });
 
     } catch (err) {

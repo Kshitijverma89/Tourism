@@ -8,7 +8,6 @@ export const createUser = async (req, res)=>{
 
     try{
         const savedUser= await newUser.save();
-        console.log(savedUser);
 
         res.status(200).json({
             success: true, 
