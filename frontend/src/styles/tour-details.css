@@ -24,12 +24,12 @@
     color: var(--text-color);
  }
 
- .tour__info span i {
-    color: var(__heading-color);
+ .tour__info span i{
+    color: var(--heading-color);
     font-size: 1.1rem;
  }
 
- .tour__rxtra-details{
+ .tour__extra-details{
     display: flex;
     align-items: center;
     column-gap: 2.7rem;
@@ -62,7 +62,7 @@
 
  .review__input{
     display: flex;
-    align-self: center;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     padding: 0.7rem;
@@ -95,7 +95,7 @@
  }
 
  .user__reviews {
-   margin-top: 2.5rem0;
+   margin-top: 2.5rem;
  }
 
 .review__item h5{
