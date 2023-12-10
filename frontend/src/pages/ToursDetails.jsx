@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import tourDate from '../assets/data/tours';
 import calculateAvgRating from '../utils/avgRating';
 import avatar from "../assets/images/avatar.jpg";
+import Booking from '../Components/Booking/Booking';
 
 const ToursDetails = () => {
   const {id} = useParams()
@@ -104,7 +105,7 @@ const ToursDetails = () => {
                 </div>
                 <div className="review__input">
                   <input type="text" ref={reviewMsgRef} placeholder="share your thoughts" required />
-                  <button className="btn primary__btn text-white" type="sumit">
+                  <button className="btn primary__btn text-white" type="submit">
 
                   </button>
                 </div>
@@ -136,7 +137,9 @@ const ToursDetails = () => {
               </ListGroup>
              </div>
             {/* ======= tour review section end ======= */}
-
+        </Col>
+        <Col lg="4">
+              <Booking tour={tour} avgRating={avgRating}/> 
         </Col>
       </Row>
     </Container>
@@ -144,4 +147,4 @@ const ToursDetails = () => {
   </>
 };
 
-export default ToursDetails
+export default ToursDetails;
