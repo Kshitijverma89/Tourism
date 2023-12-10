@@ -1,0 +1,11 @@
+
+.about_section{
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("../assets/images/about.jpeg") no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

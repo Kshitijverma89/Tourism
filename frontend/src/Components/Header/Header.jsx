@@ -21,7 +21,7 @@ const nav__links = [
 const Header = () => {
 
     const headerRef= useRef(null);
-
+    const menuRef= useRef(null);
     const stickyHeaderFunc=()=>{
         window.addEventListener('scroll',()=>{
             if(document.body.scrollTop>80 || document.documentElement.scrollTop>80){
@@ -36,6 +36,8 @@ const Header = () => {
         stickyHeaderFunc();
         return window.removeEventListener("scroll", stickyHeaderFunc);
     })
+
+    const toggleMenu= () => menuRef.current.classList.toggle('show__menu');
 
     return (
         <header className='header' ref={headerRef}>
