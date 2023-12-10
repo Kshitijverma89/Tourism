@@ -11,7 +11,7 @@ const bookingSchema = new mongoose.Schema(
     },
     tourName: {
         type: String,
-        required: true
+        // required: true
       },
     FullName: {
       type: String,
@@ -27,7 +27,7 @@ const bookingSchema = new mongoose.Schema(
       },
       bookAt: {
         type: Date,
-        required: true
+        // required: true
       },
   },
   { timestamps: true }

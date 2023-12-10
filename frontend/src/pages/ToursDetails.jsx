@@ -11,10 +11,12 @@ import { useEffect } from 'react';
 import {AuthContext} from "../context/AuthContext";
 
 const ToursDetails = () => {
-  const {id} = useParams()
-  const reviewMsgRef = useRef('')
+  const { id} = useParams();
+  const reviewMsgRef = useRef('');
   const [tourRating, setTourRating]=useState(null);
   const {user}=useContext(AuthContext);
+
+  console.log(id);
    
 
   //fetch data from database

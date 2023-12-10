@@ -1,34 +1,62 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react'
 import "./booking.css";
 import { Form , FormGroup, ListGroup, ListGroupItem, Button} from 'reactstrap';
 
 import { useNavigate } from 'react-router-dom';
+import {AuthContext} from "../../context/AuthContext";
+import {BASE_URL} from "../../utils/config";
 
 const Booking = ({tour,avgRating}) => {
 
     const {price,reviews}=tour;
     const navigate= useNavigate();
-    const [credentials, setCredentials] = useState({
-        userId: '01', // later it will be dynamic
-        userEmail: 'example@gmail.com',
-        fullName: '',
+
+    const {user} = useContext(AuthContext);
+    const [booking, setBooking] = useState({
+        userId: user && user._id,
+        userEmail: user && user.email,
+        FullName: "",
         phone: '',
         guestSize: 1,
         bookAt: ''
     })
 
     const handleChange = e =>{
-        setCredentials(prev=>({...prev, [e.target.id]: e.target.value}))
+        setBooking(prev=>({...prev, [e.target.id]: e.target.value}))
     };
 
     const serviceFee=10;
-    const totalAmount= Number(price) * Number(credentials.guestSize) + Number(serviceFee); 
+    const totalAmount= Number(price) * Number(booking.guestSize) + Number(serviceFee); 
 
     // send data to the server 
-    const handleClick= e =>{
+    const handleClick= async(e) =>{
         e.preventDefault();
 
-       navigate('/thank-you');
+        console.log(booking);
+
+        try{
+            if(!user || user===undefined || user ===null){
+                return alert("Please sign in");
+            }
+
+            const res = await fetch(`${BASE_URL}/booking`,{
+            method:"post",
+            headers:{
+                "content-type": "application/json"
+            },
+            credentials: "include",
+            body:JSON.stringify(booking)
+        });
+        const result = await res.json();
+
+        if(!res.ok){
+            return alert(result.message);
+        }
+        navigate('/thank-you');
+        }catch(error){
+            alert(error.message);
+        }
+       
     };
 
   return (
@@ -46,7 +74,7 @@ const Booking = ({tour,avgRating}) => {
             <h5>Information</h5>
             <Form className='booking__info-form' onSubmit={handleClick}>
                <FormGroup>
-                    <input type="text" placeholder='Full Name' id='fullName' required onChange={handleChange}/>
+                    <input type="text" placeholder='Full Name' id='FullName' required onChange={handleChange}/>
                </FormGroup>
                <FormGroup>
                     <input type="number" placeholder='Phone' id='phone' required onChange={handleChange}/>
