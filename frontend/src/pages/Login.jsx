@@ -44,7 +44,14 @@ const Login = () => {
       console.log(result.data);
 
       dispatch({type: "LOGIN_SUCCESS", payload: result.data});
+      //ammended code
+        if(result.data.email==="kshitij12@gmail.com"){
+          navigate("/myBookings");
+        }
+        else{
+      //ends
       navigate("/");
+        }
 
     }catch(error){
       dispatch({type: "LOGIN_FAILURE", payload: error.message});
