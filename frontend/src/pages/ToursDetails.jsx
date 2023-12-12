@@ -92,7 +92,7 @@ const ToursDetails = () => {
         !loading && !error && (<Row>
           <Col lg='8'>
             <div className="tour__content">
-              <img src={photo} alt="" />
+              <img src={photo} alt="" className='tourImg' />
   
               <div className="tour__info">
                 <h2>{title}</h2>

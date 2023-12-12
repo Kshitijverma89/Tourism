@@ -121,3 +121,8 @@
 .review__item span {
     font-weight: 500;
 }
+
+.tourImg{
+   width : "350px";
+    height : "200px";
+}

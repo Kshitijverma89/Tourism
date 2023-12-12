@@ -7,6 +7,7 @@ import registerImg from '../assets/images/register.png';
 import userIcon from '../assets/images/user.png';
 import {AuthContext} from "../context/AuthContext"
 import {BASE_URL} from "../utils/config";
+import registerValidation from '../Components/Validation/registerValidation';
 
 const Register = () => {
 
@@ -15,6 +16,8 @@ const Register = () => {
     email:undefined,
     password:undefined
   });
+
+  const [errors, setErrors]=useState({});
 
   const {dispatch}=useContext(AuthContext);
   const navigate = useNavigate();
@@ -25,6 +28,8 @@ const Register = () => {
  
   const handleClick= async(e) =>{
     e.preventDefault();
+    setErrors(registerValidation(credentials));
+
     try{
       const res= await fetch(`${BASE_URL}/auth/register`,{
         method:"post",
@@ -37,12 +42,13 @@ const Register = () => {
 
       if(!res.ok) alert(result.message);
 
-      dispatch({type:"RESGISTER_SUCCESS"});
-      navigate("/login")
-
+      dispatch({type:"REGISTER_SUCCESS"});
+      // navigate("/login");
+       
       }catch(err){
         alert(err.message);
     }
+     
   };
 
   return <section>
@@ -62,15 +68,19 @@ const Register = () => {
 
                   <Form onSubmit={handleClick}>
                     <FormGroup>
-                      <input type="text" placeholder='Username' required id="username" onChange={handleChange} />
+                      <input type="text" placeholder='Username'  id="username"  onChange={handleChange} />
+                      {errors.name && <p style={{color:"red", fontsize: "14px"}}>{errors.name}</p>}
                     </FormGroup>
                     <FormGroup>
-                      <input type="email" placeholder='Email' required id="email" onChange={handleChange} />
+                      <input type="email" placeholder='Email'  id="email" onChange={handleChange} />
+                      {errors.email && <p style={{color:"red", fontsize: "14px"}}>{errors.email}</p>}
                     </FormGroup>
                     <FormGroup>
-                      <input type="password" placeholder='Password' required id="password" onChange={handleChange} />
+                      <input type="password" placeholder='Password'  id="password"   onChange={handleChange} />
+                      {errors.password && <p style={{color:"red", fontsize: "14px"}}>{errors.password}</p>}
                     </FormGroup>
-                    <Button className='btn secondary__btn auth__btn' type='submit'>Create Account</Button>
+                    <Button className='btn secondary__btn auth__btn' type='submit' >Create Account</Button>
+              
                   </Form>
                   <p>Already have an account? <Link to='/login'>Login</Link></p>
                 </div>

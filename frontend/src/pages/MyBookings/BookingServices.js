@@ -12,7 +12,9 @@ export async function fetchBookings(){
 }
 export async function updateData(body){
     try{
-        const response= await axios.put("http://127.0.0.1:4000/bookings",body);
+       
+        const response= await axios.put("http://127.0.0.1:4000/bookings");
+        // console.log(url);
         return response.data;
     }catch(error){
         console.log(error);

@@ -23,7 +23,7 @@ const Routers=()=>{
                 <Route path='/about' element={<About/>}/>
                 <Route path='/thank-you' element={<ThankYou/>}/>
                 <Route path='/tours/search' element={<SearchResultList/>}/>
-                <Route path='/mybookings' element={<MyBookings/>}/>
+                <Route path='/myBookings' element={<MyBookings/>}/>
             </Routes>
     )
 }

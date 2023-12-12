@@ -7,6 +7,7 @@ import loginImg from '../assets/images/login.png';
 import userIcon from '../assets/images/user.png';
 import {AuthContext} from "../context/AuthContext"
 import {BASE_URL} from "../utils/config";
+import loginValidation from '../Components/Validation/loginValidation';
 
 const Login = () => {
 
@@ -14,6 +15,8 @@ const Login = () => {
     email:undefined,
     password:undefined
   });
+
+  const [errors, setErrors]=useState({});
 
   const {dispatch}=useContext(AuthContext);
   const navigate = useNavigate();
@@ -24,6 +27,7 @@ const Login = () => {
  
   const handleClick= async(e) =>{
     e.preventDefault();
+    setErrors(loginValidation(credentials));
 
     dispatch({type: "LOGIN_START"})
 
@@ -39,13 +43,15 @@ const Login = () => {
       }) 
 
       const result = await res.json()
-      if(!res.ok) alert(result.message);
+       if(!res.ok) {
+        alert(result.message);
+      }
 
       console.log(result.data);
 
       dispatch({type: "LOGIN_SUCCESS", payload: result.data});
       //ammended code
-        if(result.data.email==="kshitij12@gmail.com"){
+        if(result.data.email==="admin@gmail.com"){
           navigate("/myBookings");
         }
         else{
@@ -75,10 +81,12 @@ const Login = () => {
 
                   <Form onSubmit={handleClick}>
                     <FormGroup>
-                      <input type="text" placeholder='Email' required id="email" onChange={handleChange} />
+                      <input type="text" placeholder='Email'  id="email" onChange={handleChange} />
+                      {errors.email && <p style={{color:"red", fontsize: "14px"}}>{errors.email}</p>}
                     </FormGroup>
                     <FormGroup>
-                      <input type="password" placeholder='Password' required id="password" onChange={handleChange} />
+                      <input type="password" placeholder='Password'  id="password" onChange={handleChange} />
+                      {errors.password && <p style={{color:"red", fontsize: "14px"}}>{errors.password}</p>}
                     </FormGroup>
                     <Button className='btn secondary__btn auth__btn' type='submit'>Login</Button>
                   </Form>

@@ -79,7 +79,7 @@ export default function MyBookings() {
                                                 setId(s._id);
                                             }}>Delete</Button>&nbsp;&nbsp;&nbsp;&nbsp;
                                             <Button variant="primary" onClick={()=>{
-                                                navigate(`/edit/${s.roll}`);
+                                                // navigate(`/edit/${s.roll}`);
                                             }}>Edit</Button>
                                         </td>
                                     </tr>
@@ -93,7 +93,7 @@ export default function MyBookings() {
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are your sure you want to delete Roll No. {id}?</Modal.Body>
+                <Modal.Body>Are your sure you want to delete ?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={handleDelete}>
                         Yes
